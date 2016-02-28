@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Grumblr{% endblock%}</title>
+    <link href="/static/grumblr/css/bootstrap.min.css" rel="stylesheet">
+    <link type="text/css" href="/static/grumblr/css/grumblrStyle.css" rel="stylesheet" >
+  </head>
+  <body>
+    <div class="login-bg">
+      <div class="box">
+      {% block login-form %}{% endblock %}
+      {% block register-form %}{% endblock %}
+      {% block setPassword-form%}{% endblock %}
+      {% block emailsent %}{% endblock %}
+      </div>
+    </div>
+  </body>
+</html>

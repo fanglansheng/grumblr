@@ -1,0 +1,35 @@
+{% extends "grumblr/base.html" %}
+{% block profile-info %}
+<div class="following-contianer">
+  <div class="pf-pic">
+      {% if user.profile.picture %}
+      <img  src="{% url 'profile-photo' user %}" alt="{{user.username}}"/>
+      {% else %}
+      <img src="/static/grumblr/images/default_photo.jpg" alt="{{user.username}}"/>
+      {% endif %}
+  </div >
+  <div class="editProfile">
+    <p class="save">{{info}}</p>
+    <form action="{% url 'edit-profile-page' %}" method="post" enctype="multipart/form-data">
+    <p class="tagField">Profile Picture: {{profile.picture}}</p>
+    <br>
+    <a href="{% url 'email-sent' %}"class="tagField">Reset Password</a>
+    <br>
+    <p class="tagField">{{profile.first_name.label_tag}}</p>{{profile.first_name}}
+    <br>
+    <p class="tagField">{{profile.last_name.label_tag}}</p>{{profile.last_name}}
+    <br>
+    <p class="tagField">{{profile.age.label_tag}}</p>{{profile.age}}
+    <br>
+    <p class="tagField">{{profile.country.label_tag}}</p>{{profile.country}}
+    <br>
+    <p class="tagField">{{profile.city.label_tag}}</p>{{profile.city}}
+    <br>
+    <p class="tagField">{{profile.bio.label_tag}}</p>{{profile.bio}}
+    <br><br>
+    <input type="submit" value="Save" class="loginBtn btn">
+      {% csrf_token %} 
+    </form>
+  </div>
+</div>
+{% endblock %}

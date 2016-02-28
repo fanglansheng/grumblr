@@ -1,0 +1,30 @@
+{% extends "grumblr/base2.html" %}
+{% block login-form %}
+<div class="logo">Logo</div>
+
+<div class="login">
+  <form action="{% url 'login-page' %}" method="post">
+    <div class="input-group">
+      <span class="input-group-addon glyphicon glyphicon-user" id="basic-addon1"></span>
+      <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" name="username">
+    </div>
+
+    <div class="input-group">
+      <span class="input-group-addon glyphicon glyphicon-lock" id="basic-addon2"></span>
+      <input type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon2" name="password">
+    </div>
+    <input type="submit" value="Login" class="loginBtn btn">
+    {% csrf_token %}
+  </form>
+  <a class="link" href="{% url 'register-page' %}">Create A Accont</a>
+  <br>
+  <a class="link" href="{% url 'forget-password' %}">Forget Password?</a>
+  <div>
+    {% if form.errors %}
+    <p style="color:red">
+      Incorrect user name and password.
+    </p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

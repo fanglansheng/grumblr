@@ -1,0 +1,1 @@
+{"postId":{{post.id}},"html":"{% autoescape off %}{% include 'grumblr/base_post.html' %}{% endautoescape %}"}

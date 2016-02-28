@@ -1,0 +1,43 @@
+{% extends "grumblr/base.html" %}
+{% block stream-form %}
+  <div class="stream-pf">
+    <a class="stream-pf-pic" href="{% url 'profile-page' user.username %}">
+      {% if user.profile.picture %}
+      <img  alt="{{post.owner.username}}" src="{% url 'profile-photo' user.username %}"/>
+      {% else %}
+      <img src="/static/grumblr/images/default_photo.jpg" alt="{{username}}"/>
+      {% endif %}
+    </a>
+    <!-- <span class="pf-count">2048 Posts</span> -->
+    <!-- <form action="{% url 'add-new-post'%}" method="post" id="postform"> -->
+    <div class="pf-detail">
+      <p class="pf-name">{{user_full_name}}</p>
+      {% if profile.bio %}
+        <p>{{profile.bio}}</p>
+      {% else %}
+        <p>Add some self description!</p>
+      {% endif %}
+      
+        <!-- <textarea class="post-input" cols="40" id="post-text-area" maxlength="42" name="text" placeholder="What do you want to say..." rows="10"></textarea> -->
+      <form action="{% url 'add-new-post'%}" method="post" id="postform">
+      <a href="#" data-toggle="tooltip" data-placement="bottom" title="This is empty!!">
+        {{postForm.text}}
+      </a>
+      <input type="submit" id="post-btn" class="btn" value="POST">
+      {{ postForm.non_field_errors }}
+      {% for error in postForm.text.errors %}
+        <p class="error">{{error}}</p>
+      {% endfor %}
+      {% csrf_token %}
+      </form>
+    </div>
+  </div>
+  {% block comments %} {% endblock %}
+{% endblock %}
+
+{% block post-container %}
+<div class="post-container" id="posts-list">
+</div>
+<script src="/static/grumblr/js/stream.js" type="text/javascript"></script>
+
+{% endblock %}

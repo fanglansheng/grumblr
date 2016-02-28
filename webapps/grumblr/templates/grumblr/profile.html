@@ -1,0 +1,46 @@
+{% extends "grumblr/base.html" %}
+{% block profile-info %}
+<div class="pf-bg">
+  <div class="pf-pic">
+    {% if user.profile.picture %}
+    <img alt="{{user.username}}" src="{% url 'profile-photo' user %}"/>
+    {% else %}
+    <img src="/static/grumblr/images/default_photo.jpg" alt="{{user.username}}"/>
+    {% endif %}
+  </div>
+  <p class="pf-name">{{user.first_name}} {{user.last_name}}</p>
+    {% if user.profile.country %}
+      <p class="place"><strong>Place: </strong>{{user.profile.country}} {{user.profile.city}}</p>
+    {% else %}
+      <p class="place"><strong>Place: </strong>Not edit</p>
+    {% endif %}
+    {% if user.profile.age %}
+      <p class="age"><strong>Age: </strong>{{user.profile.age}}</p>
+    {% else %}
+      <p class="age"><strong>Age: </strong>???</p>
+    {% endif %}
+  
+  <p class="pf-count">{{posts_count}} Posts</p>
+  {% if user.username != currentUser %}
+    {% if isfollowed %}
+    <a href="{% url 'unfollow' user.username %}">
+      <span class="follow-btn">Unfollow</span></a>
+    {% else %}
+    <a href="{% url 'follow' user.username %}">
+      <span class="follow-btn">Follow</span></a>
+    {% endif %}
+  {% endif %}
+</div>
+{% endblock %}
+
+{% block post-container %}
+<div class="post-container">
+  {% for post in posts %}
+  <div class="post">
+    <p class="post-content">{{post.text}}</p>
+    <!-- <img class="post-img" src="https://m2.behance.net/rendition/pm/22103157/disp/95c655eace50236037fe046f759e7671.png"/> -->
+    <span class="post-time">{{post.date}}</span>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

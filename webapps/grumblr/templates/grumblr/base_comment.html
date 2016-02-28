@@ -1,0 +1,1 @@
+{% for comment in commentList.list %}<div class='comment-item'><img class='comment-face' alt='{{comment.user.username}}' src='{% url 'profile-photo' comment.user.username %}'/><p class='comment-text'><span class='comment-name'>{{comment.user.first_name}}:</span>{{comment.content}}</p><span class='comment-time'>{{comment.date}}</span></div>{% endfor %}

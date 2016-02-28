@@ -1,0 +1,35 @@
+{% extends "grumblr/base.html" %}
+
+{% block post-container %}
+{% if posts %}
+<div class="post-container" id="posts-list">
+  {% for post in posts %}
+  <div class="post">
+    <div class="post-portrait">
+    {% if post.owner.profile.picture %}
+    <img alt="{{post.owner.username}}" src="{% url 'profile-photo' post.owner.username %}"/>
+    {% else %}
+    <img src="/static/grumblr/images/default_photo.jpg" alt="{{post.owner.username}}"/>
+    {% endif %}
+    </div>
+    <div class="post-detail">
+      <a href="{% url 'profile-page' post.owner.username %}" >
+      <p class="post-name">{{post.owner.first_name}}</p>
+      </a>
+      <p class="post-content">{{post.text}}</p>
+      <!-- <img class="post-img" src="https://m2.behance.net/rendition/pm/22103157/disp/95c655eace50236037fe046f759e7671.png"/> -->
+      <span class="post-time">{{post.date}}</span>
+      <a class='comment-link' href=''>Comments</a>
+    </div>
+    <div id='{{post.id}}' class='commentList'>
+      <img class='comment-portrait' alt='{{user.username}}' src='{% url 'profile-photo' user.username %}'/>
+      <input class='comment-post' name='content'>
+      <div class='comment-contianer'></div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+<script src="/static/grumblr/js/followerStream.js" type="text/javascript"></script>
+
+{% endblock %}

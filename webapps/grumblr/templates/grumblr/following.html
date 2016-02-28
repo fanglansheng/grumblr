@@ -1,0 +1,13 @@
+{% extends "grumblr/base.html" %}
+{% block following %}
+<div class = "following-contianer">
+{% if followingList %}
+{% for friend in followingList %}
+  <div class="followingItem">
+    <p class="followingName">{{friend.first_name}} {{friend.last_name}}</p>
+    <a href="{% url 'unfollow' friend.username %}">Unfollow</a>
+  </div>
+{% endfor %}
+{% endif %}
+</div>
+{% endblock %}
